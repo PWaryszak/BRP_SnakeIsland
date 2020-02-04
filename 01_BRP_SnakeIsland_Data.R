@@ -5,17 +5,16 @@ if (!require(tidyverse)) library(tidyverse) # load that package if not done alre
 #Load these packages into your working environment
 library("readxl")
 library("tidyverse")
-#setwd("~/Documents/0.DeakinUni/RTK")#set working directory (where you store your data)
+#setwd("~/Documents/DeakinUni")#set working directory (where you store your data)
 
 snake_core <- read.csv("SnakeIsland_Core.csv")
 snake_elev <- read.csv("SnakeIsland_Elev.csv")
 
 #Merge core and elevation date from above:
-
 snake_data <- left_join(snake_core, snake_elev, by = "SampleID")
 View(snake_data)
 
-#GGPLOT elev versus latitude=====
+#PLOT elev versus latitude=====
 
 ggplot(snake_data,aes(x=latitude, y=elevation, color = site, shape = site))+
   #labs(x = "",y="",colour="year type")+
