@@ -12,14 +12,16 @@ snake_elev <- read.csv("SnakeIsland_Elev.csv")
 
 #Merge core and elevation date from above:
 snake_data <- left_join(snake_core, snake_elev, by = "SampleID")
-View(snake_data)
+write.csv(snake_data, file = "snake_data.csv", row.names = F)
 
 #PLOT elev versus latitude=====
+snake_data <- read.csv("snake_data.csv")
+names(snake_data)
 
-ggplot(snake_data,aes(x=latitude, y=elevation, color = site, shape = site))+
+ggplot(snake_data,aes(x=latitude, y=AHD_Height, color = site, shape = site))+ #AHD_Height = corrected elevation (m)
   #labs(x = "",y="",colour="year type")+
   geom_point(size = 3)+
-  facet_grid(.~site,scale="fixed") +
+  facet_grid(site~.,scale="fixed") +
   theme_bw()+
     coord_flip()+
     theme(axis.text.x=element_text(vjust=0.5,size=12),
